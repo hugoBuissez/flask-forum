@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FORUM</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+	
+
+
+<body>
+
+	<header>
+		<h1>Talk !</h1>
+		<nav>
+			<ul>
+				<li><button onclick="showModal(this.id)" id="logBtn" class="btn">Login</button></li>
+				<li><button onclick="showModal(this.id)" id="regBtn" class="btn">Register</button></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="mainCont">
+		
+
+	<div id="logBtnModal" class="modal">
+		<div class="modalCont">
+			<button id="closeLog" class="closeBtn">X</button>
+			<form id="logForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="fname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="lname" name="pswd" placeholder="Password">  
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+
+	<div id="regBtnModal" class="modal">
+		<div class="modalCont">
+			<button id="closeReg" class="closeBtn">X</button>
+			<form id="regForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="regfname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="reglname" name="pswd" placeholder="Password">  
+		    <label for="confPswd">Confirm paswword</label>
+		    <input type="password" name="confPswd" placeholder="Confirm your password">
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+
+	<div class="Claimsg">
+		<h2>NAME OF THE TOPIC</h2>
+		<h4 style="font-style: italic; font-weight: lighter;">You can either create a new claim or reply to an existing one</h4>
+	</div>
+
+	<hr>
+
+	<div class="center">
+	<button onclick="showModal(this.id)" id="addBtn" class="addBtn">Add claim</button>
+	</div>
+
+	<ul class="breadcrumb" id="#bcrumb">
+  	  <li><a href="{{ url_for('view') }}">Topics</a></li>
+  	  <li>Claims</li>
+	</ul>	
+
+	<div class="modal" id="addBtnModal">
+			<form class="modalCont" id="modalAdd" method="POST" action="/">
+			<input class="sqInput" type="text" name="topicName" placeholder="Name of your claim">
+			<input class="sqInput" type="text" name="topicSub" placeholder="Theme">
+			<button type="submit" id="addBtn" class="addBtn" style="background-color: #7ead6a">Add</button>
+			</form>
+	</div>
+
+	<table>
+
+		<tr>
+			<th>Claim</th>
+			<th>Date</th>
+			<th>Replies</th>
+		</tr>
+
+		{% for claim in claims %}
+		<tr>
+			<td>
+				{% if claim[2] %}
+				<a href="">
+				{{claim[2]}}
+				</a>
+				{% endif %}
+				
+				<p>DEFAULT</p>
+
+			</td>
+			<td>{% if claim[3] %} {{claim[3]}} {% endif %}</td>
+			<td>{% if claim[4] %} {{claim[4]}} {% endif %}</td>
+		</tr>
+
+		{% endfor %}
+
+		
+	</table>
+	</div>
+
+
+</body>
+</html>
+
+<script>
+	
+	var closeBtn = $('.closeBtn');
+	var modal = $('.modal');
+
+	function showModal(id) {
+		$('#'+id+'Modal').fadeIn(300)
+	}
+
+	closeBtn.click(function() {
+		console.log(closeBtn.parent());
+		closeBtn.parent().parent().fadeOut(300);
+	});
+
+	$(document).keydown(function(event) { 
+  		if (event.keyCode == 27) { 
+    		$(modal).fadeOut(300);
+  		}
+	});
+	
+</script>

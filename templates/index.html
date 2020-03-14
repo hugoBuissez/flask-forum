@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FORUM</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+	
+	
+
+
+<body>
+		<header>
+		<h1>Talk !</h1>
+		<nav>
+			<ul>
+				<li><button onclick="showModal(this.id)" id="logBtn" class="btn">Login</button></li>
+				<li><button onclick="showModal(this.id)" id="regBtn" class="btn">Register</button></li>
+			</ul>
+		</nav>
+		</header>
+
+	<div class="mainCont">
+			
+	<div id="logBtnModal" class="modal">
+		<div class="modalCont">
+			<button class="closeBtn">X</button>
+			<form id="logForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="fname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="lname" name="pswd" placeholder="Password">  
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+
+	<div id="regBtnModal" class="modal">
+		<div class="modalCont">
+			<button class="closeBtn">X</button>
+			<form id="regForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="regfname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="reglname" name="pswd" placeholder="Password">  
+		    <label for="confPswd">Confirm paswword</label>
+		    <input type="password" name="confPswd" placeholder="Confirm your password">
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+	<div class="Claimsg">
+		<h2>Welcome to Talk !</h2>
+		<h3>Here, you can post comments about many topics that you like !</h3>
+	</div>
+
+	<hr>
+
+	<div class="center">
+	<button onclick="showModal(this.id)" id="addBtn" class="addBtn">Add topic</button>
+	</div>
+
+	<ul class="breadcrumb" id="#bcrumb">
+  	  <li>Topics</li>
+	</ul>	
+
+	<div class="modal" id="addBtnModal">
+			<form class="modalCont" id="modalAdd" method="POST" action="/">
+			<input class="sqInput" type="text" name="topicName" placeholder="Name of your topic">
+			<input class="sqInput" type="text" name="topicSub" placeholder="Theme">
+			<button type="submit" id="addBtn" class="addBtn" style="background-color: #7ead6a">Add</button>
+			</form>
+	</div>
+
+	
+	<table>
+		<tr class="tableHd">
+			<th>Topic</th>
+			<th>Date</th>
+			<th>Claims</th>
+		</tr>
+
+		{% for topic in topics %}
+		<tr>
+			<td>
+				{% if topic[1] %}
+				<a href="{{ url_for('claims', idtopic = topic[0]) }}">
+				{{topic[1]}}
+				</a>
+				{% endif %}
+				
+				{% if topic[2] %}
+				<p>{{topic[2]}}</p>
+				{% endif %}
+
+			</td>
+			<td>{% if topic[3] %} {{topic[3]}} {% endif %}</td>
+			<td>{{ topic[4] }}</td>
+		</tr>
+
+		{% endfor %}
+
+	</table>
+	</div>
+
+
+</body>
+</html>
+
+<script>
+	
+	var closeBtn = $('.closeBtn');
+	var modal = $('.modal');
+
+	function showModal(id) {
+		$('#'+id+'Modal').fadeIn(300)
+	}
+
+	closeBtn.click(function() {
+		console.log(closeBtn.parent());
+		closeBtn.parent().parent().fadeOut(300);
+	});
+
+	$(document).keydown(function(event) { 
+  		if (event.keyCode == 27) { 
+    		$(modal).fadeOut(300);
+  		}
+	});
+	
+</script>

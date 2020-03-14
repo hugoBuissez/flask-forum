@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FORUM</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+	
+
+
+<body>
+
+	<header>
+		<h1>Talk !</h1>
+		<nav>
+			<ul>
+				<li><button id="logBtn" class="btn">Login</button></li>
+				<li><button id="regBtn" class="btn">Register</button></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="mainCont">
+		
+
+	<div id="modalLog" class="modal">
+		<div class="modalCont">
+			<button id="closeLog" class="closeBtn">X</button>
+			<form id="logForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="fname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="lname" name="pswd" placeholder="Password">  
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+
+	<div id="modalReg" class="modal">
+		<div class="modalCont">
+			<button id="closeReg" class="closeBtn">X</button>
+			<form id="regForm" method="POST" action="#">
+		    <label for="email">Email</label>
+		    <input type="text" id="regfname" name="email" placeholder="Email adress">
+		    <label for="pswd">Password</label>
+		    <input type="password" id="reglname" name="pswd" placeholder="Password">  
+		    <label for="confPswd">Confirm paswword</label>
+		    <input type="password" name="confPswd" placeholder="Confirm your password">
+		    <input type="submit" value="Submit">
+ 		 </form>
+		</div>
+	</div>
+
+
+	<div class="Claimsg">
+		<h2>NAME OF THE TOPIC</h2>
+		<h4 style="font-style: italic; font-weight: lighter;">You can either created a new claim or reply to an existing one</h4>
+	</div>
+
+	
+
+	<div class="topTable">
+
+	<ul class="breadcrumb" id="#bcrumb">
+	  <li><a href="file:///home/hugo/ForumWeb/templates/index.html">Home</a></li>
+  	  <li><a href="file:///home/hugo/ForumWeb/templates/index.html">Topic</a></li>
+   	  <li><a href="file:///home/hugo/ForumWeb/templates/claims.html">Claims</a></li>
+   	  <li>Replies</li>
+
+	</ul>
+
+	<div class="addTopCont">
+		<form class="addForm" id="addForm">
+			<input class="sqInput" type="text" name="topicName" placeholder="">
+		</form>
+		<button id="addBtn" class="addBtn" style="background-color: #7ead6a">Add</button>
+
+	</div>
+
+	</div>
+
+	<ul class="listReply">
+			<li> 
+				<div class="reply">
+					<div class="replyHd">
+						<p class="replyNm">Hugo</p>
+						<p class="replyDte">18.04.2020</p>
+					</div>
+					<div class="replyBdy">
+						<img src="../Images/user-circle-solid.svg" style="height: 10%; width: 10%">
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+					</div>
+
+					<div class="replyBtn">
+						<button id="1" class="addBtn idBtn" onclick="showReply(this.id)">Reply</button>
+					</div>
+				</div>
+		</li>
+		<li> 
+				<div class="reply">
+					<div class="replyHd">
+						<p class="replyNm">Hugo</p>
+						<p class="replyDte">18.04.2020</p>
+					</div>
+					<div class="replyBdy">
+						<img src="../Images/user-circle-solid.svg" style="height: 10%; width: 10%">
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indu</p>
+					</div>
+
+					<div class="replyBtn">
+						<button id="2" class="addBtn idBtn" onclick="showReply(this.id)">Reply</button>
+					</div>
+				</div>
+		</li>
+
+		<ul id="replyTmp" class="replyTmp">
+				<li>
+					<div class="reply">
+						<form class="replyText" action="">
+						  <textarea name="message" rows="3" cols="50" placeholder="Answer here"></textarea>
+						  <input class="addBtn" type="submit">
+						</form>
+					</div>
+				</li>
+		</ul>
+			
+	</ul>
+
+	</div>
+
+
+</body>
+</html>
+
+<script>
+	var btnLog = $('#logBtn');
+	var btnReg = $('#regBtn');
+	var modalReg = $('#modalReg');
+	var modalLog = $('#modalLog');
+	var closeBtn = $('.closeBtn');
+	var modal = $('.modal');
+	var replyBox = $('#replyTmp');
+
+	function showReply(id) {
+
+		var btn = $('#'+id);
+		var parent = btn.parent().parent().parent();
+		console.log(parent);
+
+		if(btn.text() == 'Reply') {
+			replyBox.appendTo(parent);
+			replyBox.slideDown(300);
+			btn.html('Cancel');
+		}
+
+		else {
+			replyBox.slideUp(300);
+			btn.html('Reply');
+		}
+
+	};
+
+	
+
+	btnLog.click(function() {
+		modalLog.fadeIn(300);
+	});
+
+	btnReg.click(function() {
+		modalReg.fadeIn(300);
+	});
+
+	closeBtn.click(function() {
+		closeBtn.parent().parent().fadeOut(300);
+	});
+
+	$(document).keydown(function(event) { 
+  		if (event.keyCode == 27) { 
+    		$(modal).fadeOut(300);
+  		}
+	});
+	
+</script>

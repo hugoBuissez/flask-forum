@@ -6,6 +6,7 @@ from mysql.connector import Error
 app = Flask(__name__)
 app.secret_key = b'notAGoodSecretKey'
 
+# Change credentials to test it if necessary
 cnx = mysql.connector.connect(host="localhost", 
                               user="root",
                               password="rootpass",

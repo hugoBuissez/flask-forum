@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: forum
 -- ------------------------------------------------------
--- Server version	5.7.29
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,7 +53,7 @@ CREATE TABLE `claims` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `replies` int(11) DEFAULT '0',
   PRIMARY KEY (`idclaim`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `claims` (
 
 LOCK TABLES `claims` WRITE;
 /*!40000 ALTER TABLE `claims` DISABLE KEYS */;
-INSERT INTO `claims` VALUES (1,1,'Best airplane','2020-03-09 23:03:36',0),(2,2,'Not a very good langage','2020-03-09 23:03:36',0),(3,1,'test','2020-03-11 19:02:39',0),(4,1,'NAN','2020-03-11 19:02:42',0),(5,1,'lol','2020-03-11 19:03:18',0),(6,1,'and a1350','2020-03-12 01:16:08',0),(7,3,'TESTING','2020-03-12 01:16:08',0),(8,1,'LOL','2020-03-13 16:06:48',0),(9,10,'what','2020-03-13 16:06:58',0),(10,9,'best serie','2020-03-13 18:45:09',0),(11,9,'prison break','2020-03-13 19:05:53',0),(12,12,'test','2020-03-13 19:15:14',0),(13,12,'oui','2020-03-13 19:17:40',0),(14,11,'AH OUI HEIN','2020-03-13 19:17:49',0),(15,13,'Froome overrated','2020-03-13 19:18:41',0),(16,7,'TRUE','2020-03-14 01:23:15',0);
+INSERT INTO `claims` VALUES (1,1,'Claim to test','2020-03-09 23:01:12',0);
 /*!40000 ALTER TABLE `claims` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `topic` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `claims` int(11) DEFAULT '0',
   PRIMARY KEY (`idtopic`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
-INSERT INTO `topic` VALUES (1,'The A330 Neo','DEFAULT',NULL,NULL),(2,'Ocaml','DEFAULT',NULL,NULL),(3,'Is the date working ?','DEFAULT','2020-03-09 23:01:12',0),(4,'Format','DEFAULT','2020-03-09 23:03:36',0),(5,'GTAV','Game','2020-03-09 23:16:49',0),(6,'Joseph\'s dick','Anatomy','2020-03-10 11:32:35',0),(7,'Nathan la pedale','homo','2020-03-10 13:01:05',1),(9,'Prison Break','TV Series','2020-03-11 00:12:00',0),(10,'ss','','2020-03-11 00:12:04',0),(11,'TEST','','2020-03-11 00:12:10',1),(12,'Lack of surgeons','Medecine','2020-03-12 01:13:39',2),(13,'Cyclisme','SPort','2020-03-13 19:18:24',1),(14,'Oui','Non','2020-03-14 01:55:50',0);
+INSERT INTO `topic` VALUES (1,'The A330 Neo','New airbus aircraft','2020-03-09 23:01:12',1),(17,'Euro 2020','Football','2020-04-20 22:51:39',0);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-14  2:24:54
+-- Dump completed on 2020-04-20 22:53:33

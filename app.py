@@ -7,9 +7,9 @@ app = Flask(__name__)
 app.secret_key = b'notAGoodSecretKey'
 
 cnx = mysql.connector.connect(host="localhost", 
-							user="root", 
-							passwd="rootpass",
-							database="forum")
+                              user="root",
+                              password="rootpass",
+                              database="forum")
 cursor = cnx.cursor()
 
 

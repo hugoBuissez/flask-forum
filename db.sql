@@ -47,13 +47,14 @@ DROP TABLE IF EXISTS `claims`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `claims` (
-  `idclaim` int(11) NOT NULL AUTO_INCREMENT,
-  `related_topic` int(11) NOT NULL,
-  `title` varchar(45) DEFAULT NULL,
+  `topicId` int(11) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `subheading` varchar(50) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `replies` int(11) DEFAULT '0',
-  PRIMARY KEY (`idclaim`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  KEY `claims_ibfk_1` (`topicId`),
+  CONSTRAINT `claims_ibfk_1` FOREIGN KEY (`topicId`) REFERENCES `topic` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +63,7 @@ CREATE TABLE `claims` (
 
 LOCK TABLES `claims` WRITE;
 /*!40000 ALTER TABLE `claims` DISABLE KEYS */;
-INSERT INTO `claims` VALUES (1,1,'Claim to test','2020-03-09 23:01:12',0);
+INSERT INTO `claims` VALUES (4,'Pospone','Is is real?','2020-04-23 15:20:09',0),(4,'Pospone','Is is real?','2020-04-23 15:24:31',0);
 /*!40000 ALTER TABLE `claims` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,13 +75,13 @@ DROP TABLE IF EXISTS `topic`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `topic` (
-  `idtopic` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL,
-  `subheading` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `subheading` varchar(50) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `claims` int(11) DEFAULT '0',
-  PRIMARY KEY (`idtopic`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
-INSERT INTO `topic` VALUES (1,'The A330 Neo','New airbus aircraft','2020-03-09 23:01:12',1),(17,'Euro 2020','Football','2020-04-20 22:51:39',0);
+INSERT INTO `topic` VALUES (4,'Euro 2020','Football','2020-04-23 15:20:00',2);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-20 22:53:33
+-- Dump completed on 2020-04-23 15:35:41

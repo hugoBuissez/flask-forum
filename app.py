@@ -13,10 +13,15 @@ cnx = mysql.connector.connect(host="localhost",
                               database="forum")
 cursor = cnx.cursor()
 
+#Q1 = "CREATE TABLE topic (id int PRIMARY KEY AUTO_INCREMENT, title varchar(50), subheading varchar(50), created_date varchar(50), claims int)"
+#Q2 = "CREATE TABLE claims (topicId int PRIMARY KEY,  FOREIGN KEY(topicId) REFERENCES topic(id), title varchar(50), subheading varchar(50), created_date varchar(50), replies int)"
+
+#cursor.execute(Q1)
+#cursor.execute(Q2)
 
 @app.route('/')
 def view():	
-	sqlSelect = "SELECT * FROM topic ORDER BY idtopic DESC"
+	sqlSelect = "SELECT * FROM topic ORDER BY id DESC"
 	cursor.execute(sqlSelect ,())
 	results = cursor.fetchall()
 	cnx.commit()
@@ -29,12 +34,20 @@ def view():
 def claims(idtopic):
 
 	print(idtopic)
-	sqlDisplay = "SELECT * FROM claims WHERE related_topic=(%s) ORDER BY idclaim DESC"
+	sqlDisplay = "SELECT * FROM claims WHERE topicId=(%s)"
+	sqlTopicTitle = "SELECT * FROM topic WHERE id=(%s)"
+
 	cursor.execute(sqlDisplay, (idtopic, ))
 	results = cursor.fetchall()
+
+	cursor.execute(sqlTopicTitle, (idtopic, ))
+	title = cursor.fetchall()
+	print(results)
+
+
 	cnx.commit()
 
-	return render_template("claims.html", claims=results, topic=idtopic)
+	return render_template("claims.html", claims=results, topic=title)
 
 @app.route('/', methods=['GET', 'POST'])
 def addTopic():
@@ -52,17 +65,18 @@ def addTopic():
 @app.route('/claims', methods=['GET', 'POST'])
 def addClaim():
 	
-	claimName = request.form["claimName"]
-	topRelated = request.form["topic"]
+	name = request.form["title"]
+	sub = request.form["sub"]
+	topic = request.form["topic"]
 
-	sqlInsert = "INSERT INTO claims (title, related_topic, replies) VALUES (%s,%s,%s)"
-	sqlIncre = "UPDATE topic SET claims = claims+1 WHERE idtopic = %s"
+	sqlInsert = "INSERT INTO claims (topicId, title, subheading) VALUES (%s,%s,%s)"
+	sqlIncre = "UPDATE topic SET claims = claims+1 WHERE id = %s"
 
-	cursor.execute(sqlInsert, (claimName, topRelated, 0))
-	cursor.execute(sqlIncre, (topRelated, ))
+	cursor.execute(sqlInsert, (topic, name, sub, ))
+	cursor.execute(sqlIncre, (topic, ))
 	cnx.commit()
 
-	return redirect(url_for("claims", idtopic=topRelated))
+	return redirect(url_for("claims", idtopic=topic))
 		
 
 

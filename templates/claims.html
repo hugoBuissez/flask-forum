@@ -14,7 +14,7 @@
 <body>
 
 	<header>
-		<h1>Talk !</h1>
+		<h1 style="margin-left: 20px">Talk !</h1>
 		<nav>
 			<ul>
 				<li><button onclick="showModal(this.id)" id="logBtn" class="btn">Login</button></li>
@@ -57,8 +57,8 @@
 
 
 	<div class="Claimsg">
-		<h2>NAME OF THE TOPIC</h2>
-		<h4 style="font-style: italic; font-weight: lighter;">You can either create a new claim or reply to an existing one</h4>
+		<h2>You're on the topic: {{ topic[0][1] }}</h2>
+		<h3 style="font-style: italic; font-weight: lighter;">You can either create a new claim or reply to an existing one</h3>
 	</div>
 
 	<hr>
@@ -73,9 +73,10 @@
 	</ul>	
 
 	<div class="modal" id="addBtnModal">
-			<form class="modalCont" id="modalAdd" method="POST" action="/">
-			<input class="sqInput" type="text" name="topicName" placeholder="Name of your claim">
-			<input class="sqInput" type="text" name="topicSub" placeholder="Theme">
+			<form class="modalCont" id="modalAdd" method="POST" action="{{ url_for('addClaim') }}">
+			<input class="sqInput" type="text" name="title" placeholder="Name of your claim">
+			<input class="sqInput" type="text" name="sub" placeholder="Theme">
+			<input type="hidden" name="topic" value="{{ topic[0][0] }}">
 			<button type="submit" id="addBtn" class="addBtn" style="background-color: #7ead6a">Add</button>
 			</form>
 	</div>
@@ -91,17 +92,18 @@
 		{% for claim in claims %}
 		<tr>
 			<td>
-				{% if claim[2] %}
+				{% if claim[1] %}
 				<a href="">
-				{{claim[2]}}
+				{{claim[1]}}
 				</a>
 				{% endif %}
 				
-				<p>DEFAULT</p>
+				{% if claim[2] %} <p> {{claim[2]}} </p> {% endif %}
 
 			</td>
 			<td>{% if claim[3] %} {{claim[3]}} {% endif %}</td>
-			<td>{% if claim[4] %} {{claim[4]}} {% endif %}</td>
+			<td>{{claim[4]}}</td>
+
 		</tr>
 
 		{% endfor %}

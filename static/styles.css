@@ -11,6 +11,7 @@ p {
 	margin: 10px 0;
 }
 
+
 textarea {
 	resize: vertical;
 }
@@ -37,10 +38,11 @@ header {
 	width: 100%;
 }
 
-header a {
-	margin-left: 3%;
-	color: #000;
-	font-size: 30px;
+.titlePage {
+	margin-left: 2%;
+	text-decoration: none;
+	color: #fefefe;
+	font-size: 33px;
 }
 
 header nav {
@@ -92,7 +94,7 @@ ul {
 	list-style: none;
 }
 
-a:link, a:visited {
+a:link, a:visited:not(.titlePage) {
 	color: #0090DA;
 }
 
@@ -232,7 +234,10 @@ tr:nth-child(even) {
     color: white;
     height: 35px;
     cursor: pointer;
-   	
+}
+
+.delBtn {
+	text-decoration: none;
 }
 
 .sqInput {

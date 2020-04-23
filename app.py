@@ -26,14 +26,11 @@ def view():
 	results = cursor.fetchall()
 	cnx.commit()
 
-	print(results)
-
 	return render_template("index.html", topics=results)
 
 @app.route('/claims/<idtopic>')
 def claims(idtopic):
 
-	print(idtopic)
 	sqlDisplay = "SELECT * FROM claims WHERE topicId=(%s)"
 	sqlTopicTitle = "SELECT * FROM topic WHERE id=(%s)"
 
@@ -42,8 +39,6 @@ def claims(idtopic):
 
 	cursor.execute(sqlTopicTitle, (idtopic, ))
 	title = cursor.fetchall()
-	print(results)
-
 
 	cnx.commit()
 
@@ -77,6 +72,24 @@ def addClaim():
 	cnx.commit()
 
 	return redirect(url_for("claims", idtopic=topic))
+
+
+@app.route('/delClaims/<idClaim>/<idTopic>', methods=['GET', 'POST'])
+def delClaim(idClaim=None, idTopic=None):
+	print(idClaim)
+	sqlDel = "DELETE FROM claims WHERE id=%s"
+	sqlDecr = "UPDATE topic SET claims = claims-1 WHERE id = %s"
+
+	cursor.execute(sqlDel, (idClaim, ))
+	cursor.execute(sqlDecr, (idTopic, ))
+	cnx.commit()
+
+	return redirect(url_for("claims", idtopic=idTopic))
+
+
+
+
+
 		
 
 

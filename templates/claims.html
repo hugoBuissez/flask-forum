@@ -14,7 +14,7 @@
 <body>
 
 	<header>
-		<h1 style="margin-left: 20px">Talk !</h1>
+		<a class="titlePage" href="{{ url_for('view') }}">Talk !</a>
 		<nav>
 			<ul>
 				<li><button onclick="showModal(this.id)" id="logBtn" class="btn">Login</button></li>
@@ -87,22 +87,24 @@
 			<th>Claim</th>
 			<th>Date</th>
 			<th>Replies</th>
+			<th></th>
 		</tr>
 
 		{% for claim in claims %}
 		<tr>
 			<td>
-				{% if claim[1] %}
+				{% if claim[2] %}
 				<a href="">
-				{{claim[1]}}
+				{{claim[2]}}
 				</a>
 				{% endif %}
 				
-				{% if claim[2] %} <p> {{claim[2]}} </p> {% endif %}
+				{% if claim[3] %} <p> {{claim[3]}} </p> {% endif %}
 
 			</td>
-			<td>{% if claim[3] %} {{claim[3]}} {% endif %}</td>
-			<td>{{claim[4]}}</td>
+			<td>{% if claim[4] %} {{claim[4]}} {% endif %}</td>
+			<td>{{claim[5]}}</td>
+			<td><a class="delBtn" href="{{ url_for('delClaim', idClaim=claim[0], idTopic=claim[1]) }}">❌</a></td>
 
 		</tr>
 

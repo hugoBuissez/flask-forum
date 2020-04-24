@@ -82,6 +82,7 @@
 			<th>Topic</th>
 			<th>Date</th>
 			<th>Claims</th>
+			<th></th>
 		</tr>
 
 		{% for topic in topics %}
@@ -100,6 +101,7 @@
 			</td>
 			<td>{% if topic[3] %} {{topic[3]}} {% endif %}</td>
 			<td>{{ topic[4] }}</td>
+			<td><a class="delBtn" href="{{ url_for('delTopic', idTopic=topic[0]) }}">❌</a></td>
 		</tr>
 
 		{% endfor %}

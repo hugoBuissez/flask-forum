@@ -76,7 +76,6 @@ def addClaim():
 
 @app.route('/delClaims/<idClaim>/<idTopic>', methods=['GET', 'POST'])
 def delClaim(idClaim=None, idTopic=None):
-	print(idClaim)
 	sqlDel = "DELETE FROM claims WHERE id=%s"
 	sqlDecr = "UPDATE topic SET claims = claims-1 WHERE id = %s"
 
@@ -86,7 +85,19 @@ def delClaim(idClaim=None, idTopic=None):
 
 	return redirect(url_for("claims", idtopic=idTopic))
 
+@app.route('/delTopic/<idTopic>', methods=['GET', 'POST'])
+def delTopic(idTopic):
 
+	# Remove the topic
+	sqlDel = "DELETE FROM topic WHERE id=%s"
+	# and its associated claims
+	sqlDelClaims = "DELETE FROM claims WHERE topicId=%s"
+
+	cursor.execute(sqlDelClaims, (idTopic, ))
+	cursor.execute(sqlDel, (idTopic, ))
+	cnx.commit()
+
+	return redirect(url_for('view'))
 
 
 

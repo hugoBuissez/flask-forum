@@ -34,9 +34,11 @@ def claims(idtopic):
 	sqlDisplay = "SELECT * FROM claims WHERE topicId=(%s)"
 	sqlTopicTitle = "SELECT * FROM topic WHERE id=(%s)"
 
+	# Related claims of the topic.
 	cursor.execute(sqlDisplay, (idtopic, ))
 	results = cursor.fetchall()
 
+	# Retrieve the topic name.
 	cursor.execute(sqlTopicTitle, (idtopic, ))
 	title = cursor.fetchall()
 

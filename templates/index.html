@@ -3,7 +3,7 @@
 <head>
 	<title>FORUM</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css"/>
-	<link rel="shortcut icon" type="image/svg" href="../images/favicon.svg">
+	<link rel="shortcut icon" href="https://img.icons8.com/doodle/48/000000/megaphone--v1.png"/>	
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -90,8 +90,8 @@
 			<td>
 				{% if topic[1] %}
 				<a href="{{ url_for('claims', idtopic = topic[0]) }}">
-				{{topic[1]}}
-				</a>
+				{{topic[1]}}</a>
+				<span style="text-decoration: none; display:inline-block; margin-left: 7px"> 💬</span>
 				{% endif %}
 				
 				{% if topic[2] %}
